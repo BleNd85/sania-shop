@@ -1,4 +1,4 @@
-package com.example.saniashop.entity;
+package com.example.saniashop.repository.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

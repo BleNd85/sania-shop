@@ -1,4 +1,4 @@
-package com.example.saniashop.entity;
+package com.example.saniashop.repository.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Data
@@ -25,5 +25,5 @@ public class RoleEntity {
     private String name;
 
     @ManyToMany(mappedBy = "roles")
-    private Set<UserEntity> users;
+    private List<UserEntity> users;
 }

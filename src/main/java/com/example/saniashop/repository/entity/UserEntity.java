@@ -1,4 +1,4 @@
-package com.example.saniashop.entity;
+package com.example.saniashop.repository.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.NaturalId;
 
 import java.sql.Timestamp;
-import java.util.Set;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -45,8 +45,8 @@ public class UserEntity {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
-    private Set<RoleEntity> roles;
+    private List<RoleEntity> roles;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private CartEntity cart;
 }

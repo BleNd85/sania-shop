@@ -1,4 +1,4 @@
-package com.example.saniashop.entity;
+package com.example.saniashop.repository.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Data
@@ -26,6 +26,6 @@ public class CategoryEntity {
     @JoinColumn(name = "parent_id")
     private CategoryEntity parentCategory;
 
-    @OneToMany(mappedBy = "parent_category", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<CategoryEntity> subcategories;
+    @OneToMany(mappedBy = "parentCategory", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CategoryEntity> subCategories;
 }

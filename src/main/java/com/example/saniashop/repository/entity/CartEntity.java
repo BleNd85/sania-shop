@@ -1,11 +1,10 @@
-package com.example.saniashop.entity;
+package com.example.saniashop.repository.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.NaturalId;
 
 import java.util.UUID;
 
@@ -20,6 +19,7 @@ public class CartEntity {
     @Column(unique = true, nullable = false)
     private UUID id;
 
-    @OneToOne(mappedBy = "cart")
+    @OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private UserEntity user;
 }
