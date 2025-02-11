@@ -24,6 +24,7 @@ public class UserEntity {
     @Column(name = "id", unique = true, nullable = false)
     private UUID id;
 
+    @NaturalId
     @Column(name = "email", unique = true, nullable = false)
     private String email;
 

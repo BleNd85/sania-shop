@@ -32,5 +32,7 @@ public class ProductEntity {
 
     @Column(name = "description", nullable = false)
     private String description;
+
+    //todo List<ProductImageEntity> urls
 }
 

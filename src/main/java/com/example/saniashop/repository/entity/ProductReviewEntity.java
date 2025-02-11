@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.NaturalId;
 
 import java.sql.Timestamp;
 import java.util.UUID;
@@ -19,10 +20,12 @@ public class ProductReviewEntity {
     private UUID id;
 
     @ManyToOne
+    @NaturalId
     @JoinColumn(name = "user_id", nullable = false)
     private UserEntity user;
 
     @ManyToOne
+    @NaturalId
     @JoinColumn(name = "product_id", nullable = false)
     private ProductEntity product;
 
@@ -34,5 +37,7 @@ public class ProductReviewEntity {
 
     @Column(name = "created_at", nullable = false)
     private Timestamp created;
+
+    //todo List<ReviewImageEntity> urls
 
 }

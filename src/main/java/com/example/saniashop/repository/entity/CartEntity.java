@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.NaturalId;
 
 import java.util.UUID;
 
@@ -15,7 +16,9 @@ import java.util.UUID;
 @Builder
 @Table(name = "carts")
 public class CartEntity {
+
     @Id
+    @NaturalId
     @Column(unique = true, nullable = false)
     private UUID id;
 
