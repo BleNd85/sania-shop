@@ -18,8 +18,8 @@ import java.util.UUID;
 public class CartEntity {
 
     @Id
-    @NaturalId
     @Column(unique = true, nullable = false)
+    @NaturalId
     private UUID id;
 
     @OneToOne

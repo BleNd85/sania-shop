@@ -20,8 +20,8 @@ import java.util.UUID;
 public class UserEntity {
 
     @Id
-    @NaturalId
     @Column(name = "id", unique = true, nullable = false)
+    @NaturalId
     private UUID id;
 
     @NaturalId

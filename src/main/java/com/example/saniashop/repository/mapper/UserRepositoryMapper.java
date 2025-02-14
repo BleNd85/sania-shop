@@ -24,6 +24,8 @@ public interface UserRepositoryMapper {
     @Mapping(target = "cart", source = "cart")
     User toUser(UserEntity userEntity);
 
+    List<User> toUser(List<UserEntity> userEntities);
+
     @Mapping(target = "id", source = "id")
     @Mapping(target = "email", source = "email")
     @Mapping(target = "password", source = "password")
@@ -33,6 +35,8 @@ public interface UserRepositoryMapper {
     @Mapping(target = "roles", source = "roles")
     @Mapping(target = "cart", source = "cart")
     UserEntity toUserEntity(User user);
+
+    List<UserEntity> toUserEntities(List<User> users);
 
     @Named("mapRoles")
     default List<Role> mapRoles(List<RoleEntity> roleEntities) {

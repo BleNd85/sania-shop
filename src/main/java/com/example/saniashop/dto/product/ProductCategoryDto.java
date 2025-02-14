@@ -1,4 +1,4 @@
-package com.example.saniashop.domain.product;
+package com.example.saniashop.dto.product;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,17 +8,16 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Data
+@Builder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder(toBuilder = true)
-public class ProductCategory {
+public class ProductCategoryDto {
 
     private Long id;
 
     private String name;
 
-    private ProductCategory parentCategory;
+    private ProductCategoryDto parentCategory;
 
-    private List<ProductCategory> subCategories;
-
+    private List<ProductCategoryDto> subCategories;
 }

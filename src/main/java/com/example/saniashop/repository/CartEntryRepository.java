@@ -7,5 +7,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface CartEntryRepository extends NaturalIdRepository<CartEntryEntity, UUID> {
+
     List<CartEntryEntity> findByCartId(UUID cartId);
+
 }

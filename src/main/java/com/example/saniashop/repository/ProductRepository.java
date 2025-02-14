@@ -11,7 +11,7 @@ public interface ProductRepository extends NaturalIdRepository<ProductEntity, UU
 
     List<ProductEntity> findByName(String name);
 
-    List<ProductEntity> findByCategory(CategoryEntity category);
+    List<ProductEntity> findByCategoryId(Long categoryId);
 
     List<ProductEntity> findByCategoryAndName(CategoryEntity category, String name);
 

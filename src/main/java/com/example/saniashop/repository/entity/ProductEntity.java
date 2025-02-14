@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.NaturalId;
 
 import java.util.UUID;
 
@@ -18,6 +19,7 @@ public class ProductEntity {
 
     @Id
     @Column(nullable = false, unique = true)
+    @NaturalId
     private UUID id;
 
     @Column(name = "name", nullable = false)
