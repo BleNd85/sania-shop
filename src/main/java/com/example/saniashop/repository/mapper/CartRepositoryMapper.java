@@ -15,5 +15,4 @@ public interface CartRepositoryMapper {
     @Mapping(target = "id", source = "id")
     @Mapping(target = "user", source = "user")
     CartEntity toCartEntity(Cart cart);
-
 }

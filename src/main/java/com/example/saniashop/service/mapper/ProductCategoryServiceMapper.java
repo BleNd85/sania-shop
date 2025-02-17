@@ -7,10 +7,9 @@ import org.mapstruct.Mapping;
 
 import java.util.List;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface ProductCategoryServiceMapper {
 
-    @Mapping(target = "id", source = "id")
     @Mapping(target = "name", source = "name")
     @Mapping(target = "parentCategory", source = "parentCategory")
     @Mapping(target = "subCategories", source = "subCategories")
@@ -18,9 +17,8 @@ public interface ProductCategoryServiceMapper {
 
     List<ProductCategoryDto> toProductCategoryDto(List<ProductCategory> productCategories);
 
-    @Mapping(target = "id", source = "id")
     @Mapping(target = "name", source = "name")
-    @Mapping(target = "parentCategory", source = "parentCategory")
+    @Mapping(target = "parentCategory", ignore = true)
     @Mapping(target = "subCategories", source = "subCategories")
     ProductCategory toProductCategory(ProductCategoryDto productCategoryDto);
 

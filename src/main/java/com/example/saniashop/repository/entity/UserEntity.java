@@ -1,5 +1,6 @@
 package com.example.saniashop.repository.entity;
 
+import com.example.saniashop.domain.common.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,7 +22,6 @@ public class UserEntity {
 
     @Id
     @Column(name = "id", unique = true, nullable = false)
-    @NaturalId
     private UUID id;
 
     @NaturalId
@@ -40,14 +40,12 @@ public class UserEntity {
     @Column(name = "registration_date", nullable = false)
     private Timestamp registrationDate;
 
-    @ManyToMany
-    @JoinTable(
-            name = "users_role",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
-    private List<RoleEntity> roles;
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
+    @Enumerated(EnumType.ORDINAL)
+    private List<Role> roles;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private CartEntity cart;
+
 }

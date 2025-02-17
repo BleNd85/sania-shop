@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Configuration
 @EnableJpaAuditing
-@EnableJpaRepositories(value = "com.example.saniashop",
+@EnableJpaRepositories(value = "com.example.saniashop.repository",
         repositoryBaseClass = NaturalIdRepositoryImplementation.class)
 public class JPARepositoryConfiguration {
 

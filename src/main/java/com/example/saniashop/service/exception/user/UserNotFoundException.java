@@ -1,4 +1,5 @@
-package com.example.saniashop.service.exception;
+package com.example.saniashop.service.exception.user;
+
 
 import java.util.UUID;
 

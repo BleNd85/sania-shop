@@ -20,8 +20,7 @@ public class NaturalIdRepositoryImplementation<T, ID extends Serializable> exten
 
     @Override
     public Optional<T> findByNaturalId(ID naturalId) {
-        return entityManager.unwrap(Session.class)
-                .bySimpleNaturalId(this.getDomainClass())
+        return entityManager.unwrap(Session.class).bySimpleNaturalId(this.getDomainClass())
                 .loadOptional(naturalId);
     }
 

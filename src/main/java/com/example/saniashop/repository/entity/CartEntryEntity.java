@@ -19,7 +19,7 @@ public class CartEntryEntity {
     @Column(unique = true, nullable = false)
     private UUID id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "cart_id", nullable = false)
     private CartEntity cart;
 

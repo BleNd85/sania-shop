@@ -13,8 +13,6 @@ import java.util.List;
 @NoArgsConstructor
 public class ProductCategoryDto {
 
-    private Long id;
-
     private String name;
 
     private ProductCategoryDto parentCategory;

@@ -5,7 +5,7 @@ import com.example.saniashop.repository.entity.CartEntryEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring", uses = {CartRepositoryMapper.class, ProductRepositoryMapper.class})
+@Mapper(componentModel = "spring", uses = {ProductRepositoryMapper.class, CartRepositoryMapper.class})
 public interface CartEntryRepositoryMapper {
 
     @Mapping(target = "id", source = "id")
@@ -19,5 +19,6 @@ public interface CartEntryRepositoryMapper {
     @Mapping(target = "product", source = "product")
     @Mapping(target = "quantity", source = "quantity")
     CartEntryEntity toCartEntryEntity(CartEntry cartEntry);
+
 
 }
