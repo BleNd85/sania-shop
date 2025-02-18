@@ -2,6 +2,7 @@ package com.example.saniashop.web;
 
 import com.example.saniashop.service.exception.ParamsViolationException;
 import com.example.saniashop.service.exception.category.CategoryNotFoundException;
+import com.example.saniashop.service.exception.product.ProductNotFoundException;
 import com.example.saniashop.service.exception.user.UserNotFoundException;
 import com.example.saniashop.service.exception.user.UserOldPasswordException;
 import lombok.NonNull;
@@ -49,6 +50,15 @@ public class ExceptionTranslator extends ResponseEntityExceptionHandler {
         ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, ex.getMessage());
         problemDetail.setType(create("category-not-found"));
         problemDetail.setTitle("Category not found");
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(problemDetail);
+    }
+
+    @ExceptionHandler(ProductNotFoundException.class)
+    ResponseEntity<ProblemDetail> handleUserNotFoundException(ProductNotFoundException ex) {
+        log.info("Product not found exception raised");
+        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, ex.getMessage());
+        problemDetail.setType(create("product-not-found"));
+        problemDetail.setTitle("Product not found");
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(problemDetail);
     }
 

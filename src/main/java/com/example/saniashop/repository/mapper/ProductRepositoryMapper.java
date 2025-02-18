@@ -5,6 +5,8 @@ import com.example.saniashop.repository.entity.ProductEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring", uses = {ProductCategoryRepositoryMapper.class})
 public interface ProductRepositoryMapper {
 
@@ -15,10 +17,13 @@ public interface ProductRepositoryMapper {
     @Mapping(target = "description", source = "description")
     Product toProduct(ProductEntity productEntity);
 
+    List<Product> toProduct(List<ProductEntity> productEntities);
+
     @Mapping(target = "id", source = "id")
     @Mapping(target = "name", source = "name")
     @Mapping(target = "price", source = "price")
     @Mapping(target = "category", source = "productCategory")
     @Mapping(target = "description", source = "description")
+
     ProductEntity toProductEntity(Product product);
 }

@@ -7,7 +7,7 @@ import org.mapstruct.Mapping;
 
 import java.util.List;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface ProductServiceMapper {
 
     @Mapping(target = "id", source = "id")
@@ -15,9 +15,9 @@ public interface ProductServiceMapper {
     @Mapping(target = "price", source = "price")
     @Mapping(target = "productCategory", source = "productCategory")
     @Mapping(target = "description", source = "description")
-    ProductDto productToProductDto(Product product);
+    ProductDto toProductDto(Product product);
 
-    List<ProductDto> productToProductDtoList(List<Product> products);
+    List<ProductDto> toProductDto(List<Product> products);
 
     @Mapping(target = "id", source = "id")
     @Mapping(target = "name", source = "name")
@@ -26,5 +26,5 @@ public interface ProductServiceMapper {
     @Mapping(target = "description", source = "description")
     Product toProduct(ProductDto productDto);
 
-    List<Product> toProductList(List<ProductDto> productDtoList);
+    List<Product> toProduct(List<ProductDto> productDtoList);
 }

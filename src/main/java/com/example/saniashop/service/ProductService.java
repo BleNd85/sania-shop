@@ -10,14 +10,13 @@ public interface ProductService {
 
     List<Product> getAllProducts();
 
-    Optional<Product> getProductById(UUID id);
+    Product getProductById(UUID id);
 
-    List<Product> getProductsByName(String name);
-
-    List<Product> getProductsByDescription(String description);
+    List<Product> getProductsByNameOrDescription(String keyword);
 
     List<Product> getProductsByPriceRange(Integer min, Integer max);
 
     List<Product> getProductsByCategory(Long categoryId);
 
+    List<Product> getProductsByCategoryAndNameOrDescription(Long categoryId, String keyword);
 }

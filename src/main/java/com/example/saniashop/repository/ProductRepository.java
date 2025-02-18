@@ -9,7 +9,9 @@ import java.util.UUID;
 
 public interface ProductRepository extends NaturalIdRepository<ProductEntity, UUID> {
 
-    List<ProductEntity> findByName(String name);
+    List<ProductEntity> findByNameIgnoreCaseContainingOrDescriptionIgnoreCaseContaining(String keyword1, String keyword2);
+
+    List<ProductEntity> findByCategoryIdAndNameIgnoreCaseContainingOrDescriptionIgnoreCaseContaining(Long categoryId, String name, String description);
 
     List<ProductEntity> findByCategoryId(Long categoryId);
 
@@ -17,6 +19,6 @@ public interface ProductRepository extends NaturalIdRepository<ProductEntity, UU
 
     List<ProductEntity> findByDescription(String description);
 
-    List<ProductEntity> findProductEntityByPriceIsBetween(Integer min, Integer max);
+    List<ProductEntity> findByPriceIsBetween(Integer min, Integer max);
 
 }
