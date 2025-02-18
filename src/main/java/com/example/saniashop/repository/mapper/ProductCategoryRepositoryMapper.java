@@ -12,8 +12,9 @@ public interface ProductCategoryRepositoryMapper {
 
     @Mapping(target = "id", source = "id")
     @Mapping(target = "name", source = "name")
-    @Mapping(target = "parentCategory", source = "parentCategory")
+    @Mapping(target = "parentCategory", ignore = true)
     @Mapping(target = "subCategories", source = "subCategories")
+    @Mapping(target = "slug", source = "slug")
     ProductCategory toProductCategory(CategoryEntity categoryEntity);
 
     List<ProductCategory> toProductCategory(List<CategoryEntity> categoryEntities);
@@ -22,6 +23,7 @@ public interface ProductCategoryRepositoryMapper {
     @Mapping(target = "name", source = "name")
     @Mapping(target = "parentCategory", source = "parentCategory")
     @Mapping(target = "subCategories", source = "subCategories")
+    @Mapping(target = "slug", source = "slug")
     CategoryEntity toCategoryEntity(ProductCategory productCategory);
 
     List<CategoryEntity> toCategoryEntity(List<ProductCategory> productCategories);

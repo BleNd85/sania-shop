@@ -17,6 +17,8 @@ public class ProductCategory {
 
     private String name;
 
+    private String slug;
+
     private ProductCategory parentCategory;
 
     private List<ProductCategory> subCategories;

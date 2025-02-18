@@ -5,13 +5,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
-@Builder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductCategoryDto {
+@Builder
+public class ProductCategoryPathDto {
 
     private Long id;
 
@@ -19,5 +17,4 @@ public class ProductCategoryDto {
 
     private String name;
 
-    private List<ProductCategoryDto> subCategories;
 }

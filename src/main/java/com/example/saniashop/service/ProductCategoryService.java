@@ -9,13 +9,13 @@ public interface ProductCategoryService {
 
     ProductCategory getProductCategoryById(Long id);
 
-    List<ProductCategory> getAllProductCategories();
-
     List<ProductCategory> getAllTopProductCategories();
+
+    List<ProductCategory> getProductCategoryBySlug(String slug);
 
     List<ProductCategory> getProductCategoryByName(String categoryName);
 
-    List<ProductCategory> getSubCategoriesByTopCategoryId(Long topCategoryId);
+    List<ProductCategory> getCategoryPath(Long categoryId);
 
     void saveProductCategory(ProductCategory productCategory, Long parentCategoryId);
 

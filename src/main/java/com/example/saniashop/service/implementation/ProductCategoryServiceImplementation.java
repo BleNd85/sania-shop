@@ -6,9 +6,11 @@ import com.example.saniashop.repository.entity.CategoryEntity;
 import com.example.saniashop.repository.mapper.ProductCategoryRepositoryMapper;
 import com.example.saniashop.service.ProductCategoryService;
 import com.example.saniashop.service.exception.category.CategoryNotFoundException;
+import com.github.slugify.Slugify;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -16,10 +18,12 @@ public class ProductCategoryServiceImplementation implements ProductCategoryServ
 
     private final ProductCategoryRepository productCategoryRepository;
     private final ProductCategoryRepositoryMapper productCategoryRepositoryMapper;
+    private final Slugify slugify;
 
     public ProductCategoryServiceImplementation(ProductCategoryRepository productCategoryRepository, ProductCategoryRepositoryMapper productCategoryRepositoryMapper) {
         this.productCategoryRepository = productCategoryRepository;
         this.productCategoryRepositoryMapper = productCategoryRepositoryMapper;
+        this.slugify = Slugify.builder().build();
     }
 
     @Override
@@ -29,11 +33,6 @@ public class ProductCategoryServiceImplementation implements ProductCategoryServ
                 .orElseThrow(() -> new CategoryNotFoundException(id)));
     }
 
-    @Override
-    @Transactional(readOnly = true)
-    public List<ProductCategory> getAllProductCategories() {
-        return productCategoryRepositoryMapper.toProductCategory(productCategoryRepository.findAll());
-    }
 
     @Override
     @Transactional(readOnly = true)
@@ -43,16 +42,23 @@ public class ProductCategoryServiceImplementation implements ProductCategoryServ
 
     @Override
     @Transactional(readOnly = true)
-    public List<ProductCategory> getProductCategoryByName(String name) {
-        return productCategoryRepositoryMapper.toProductCategory(productCategoryRepository.findByName(name));
+    public List<ProductCategory> getProductCategoryBySlug(String slug) {
+        return productCategoryRepositoryMapper.toProductCategory(productCategoryRepository.findBySlug(slug));
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<ProductCategory> getSubCategoriesByTopCategoryId(Long parentCategoryId) {
-        CategoryEntity parentCategory = productCategoryRepository.findById(parentCategoryId)
-                .orElseThrow(() -> new CategoryNotFoundException(parentCategoryId));
-        return productCategoryRepositoryMapper.toProductCategory(productCategoryRepository.findByParentCategory(parentCategory));
+    public List<ProductCategory> getProductCategoryByName(String categoryName) {
+        return productCategoryRepositoryMapper.toProductCategory(productCategoryRepository.findByName(categoryName));
+    }
+
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<ProductCategory> getCategoryPath(Long categoryId) {
+        List<ProductCategory> productCategories = productCategoryRepositoryMapper.toProductCategory(productCategoryRepository.findCategoryPath(categoryId));
+        Collections.reverse(productCategories);
+        return productCategories;
     }
 
     @Override
@@ -64,6 +70,7 @@ public class ProductCategoryServiceImplementation implements ProductCategoryServ
                     .orElseThrow(() -> new CategoryNotFoundException(parentCategoryId));
         }
         productCategory.setParentCategory(productCategoryRepositoryMapper.toProductCategory(parentCategory));
+        productCategory.setSlug(slugify.slugify(productCategory.getName()));
         productCategoryRepository.save(productCategoryRepositoryMapper.toCategoryEntity(productCategory));
     }
 
@@ -72,14 +79,24 @@ public class ProductCategoryServiceImplementation implements ProductCategoryServ
     public void updateProductCategory(ProductCategory productCategory, Long parentCategoryId) {
         CategoryEntity oldCategory = productCategoryRepository.findById(productCategory.getId())
                 .orElseThrow(() -> new CategoryNotFoundException(productCategory.getId()));
+
         oldCategory.setName(productCategory.getName());
-        oldCategory.setParentCategory(productCategoryRepository.findById(parentCategoryId)
-                .orElseThrow(() -> new CategoryNotFoundException(parentCategoryId)));
+        oldCategory.setSlug(slugify.slugify(productCategory.getName()));
+
+        CategoryEntity parentCategory = (parentCategoryId != null)
+                ? productCategoryRepository.findById(parentCategoryId)
+                .orElseThrow(() -> new CategoryNotFoundException(parentCategoryId))
+                : null;
+
+        oldCategory.setParentCategory(parentCategory);
         productCategoryRepository.save(oldCategory);
     }
 
     @Override
+    @Transactional
     public void deleteProductCategory(Long id) {
         productCategoryRepository.deleteById(id);
     }
+
+
 }
