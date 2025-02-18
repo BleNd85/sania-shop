@@ -17,4 +17,6 @@ public interface ProductRepository extends NaturalIdRepository<ProductEntity, UU
 
     List<ProductEntity> findByDescription(String description);
 
+    List<ProductEntity> findProductEntityByPriceIsBetween(Integer min, Integer max);
+
 }
